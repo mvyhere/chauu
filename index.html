@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>châu</title>
+    <style>
+      :root {
+        --bg: #fbfaf7;
+        --line: #e8e5df;
+        --text: #2b2b2b;
+        --muted: #979797;
+        --hover: rgba(0, 0, 0, 0.025);
+        --max: 30rem;
+        --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        font-size: 0.95rem;
+        line-height: 1.65;
+        text-transform: lowercase;
+        padding-top: 1rem;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .site-shell {
+        min-height: 100vh;
+      }
+
+      .topbar {
+        padding-top: 2.7rem;
+      }
+
+      .topbar-inner,
+      .footer-inner,
+      .page {
+        width: min(var(--max), calc(100% - 2rem));
+        margin: 0 auto;
+      }
+
+      .topbar-inner {
+        display: block;
+        padding: 0;
+      }
+
+      .brand {
+        font-family: var(--sans);
+        font-size: 0.95rem;
+        font-weight: 600;
+        letter-spacing: 0;
+        color: var(--text);
+        display: inline-block;
+        margin-bottom: 0.35rem;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-family: var(--sans);
+        font-size: 0.82rem;
+        text-transform: lowercase;
+        letter-spacing: 0;
+        flex-wrap: wrap;
+      }
+
+      .nav a {
+        color: var(--muted);
+        padding: 0.2rem 0.35rem;
+        margin: -0.2rem -0.35rem;
+        border-radius: 4px;
+      }
+
+      .nav a.active,
+      .nav a:hover {
+        color: var(--text);
+        background: var(--hover);
+      }
+
+      .page {
+        padding: 1.45rem 0 4.25rem;
+      }
+
+      .eyebrow {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+        color: var(--muted);
+        font-family: var(--sans);
+        font-size: 0.78rem;
+        letter-spacing: 0;
+      }
+
+      .eyebrow-line {
+        width: 1.5rem;
+        height: 1px;
+        background: var(--line);
+      }
+
+      .featured-title,
+      .page-title,
+      .entry-title {
+        margin: 0 0 0.75rem;
+        font-size: 1.18rem;
+        line-height: 1.4;
+        font-weight: 600;
+        letter-spacing: 0;
+        max-width: none;
+      }
+
+      .featured-summary,
+      .page-intro,
+      .entry-summary {
+        margin: 0;
+        max-width: none;
+        color: var(--text);
+        font-size: 0.9rem;
+        line-height: 1.65;
+      }
+
+      .read-link,
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        margin-top: 1rem;
+        font-family: var(--sans);
+        font-size: 0.82rem;
+        color: var(--muted);
+        padding: 0.2rem 0.35rem;
+        margin-left: -0.35rem;
+        background: none;
+        border-radius: 4px;
+      }
+
+      .read-link:hover,
+      .back-link:hover {
+        background: var(--hover);
+        color: var(--text);
+      }
+
+      .home-grid {
+        display: block;
+      }
+
+      .section-label {
+        color: var(--muted);
+        font-family: var(--sans);
+        font-size: 0.78rem;
+        letter-spacing: 0;
+        margin-bottom: 1rem;
+      }
+
+      .recent-list {
+        display: block;
+      }
+
+      .entry-card {
+        display: block;
+        width: fit-content;
+        max-width: 100%;
+        padding: 0.2rem 0.35rem;
+        margin: 0.15rem -0.35rem;
+        border-radius: 4px;
+        transition: background 0.2s ease, color 0.2s ease;
+      }
+
+      .entry-card:hover {
+        background: var(--hover);
+        color: #4d83b6;
+      }
+
+      .entry-meta {
+        display: none;
+      }
+
+      .entry-tag {
+        display: none;
+      }
+
+      .entry-card h3 {
+        margin: 0;
+        font-size: 0.9rem;
+        line-height: 1.65;
+        font-weight: 600;
+        letter-spacing: 0;
+        display: inline;
+      }
+
+      .entry-card p {
+        display: none;
+      }
+
+      .simple-card {
+        padding: 0;
+      }
+
+      .page-header {
+        margin-bottom: 1rem;
+        max-width: none;
+      }
+
+      .about-grid {
+        display: block;
+      }
+
+      .mini-card {
+        padding: 0;
+        margin-bottom: 1rem;
+      }
+
+      .mini-card h3 {
+        margin: 0 0 0.25rem;
+        font-family: var(--sans);
+        font-size: 0.82rem;
+        letter-spacing: 0;
+        color: var(--muted);
+        font-weight: 400;
+      }
+
+      .mini-card p {
+        margin: 0;
+        font-size: 0.9rem;
+        line-height: 1.65;
+        color: var(--text);
+      }
+
+      .archive-group + .archive-group {
+        margin-top: 1.5rem;
+      }
+
+      .archive-year {
+        display: none;
+      }
+
+      .article-list {
+        display: block;
+      }
+
+      .article-item + .article-item {
+        margin-top: 0;
+      }
+
+      .article-item-title {
+        margin: 0;
+        font-size: 0.9rem;
+        line-height: 1.65;
+        font-weight: 600;
+        display: inline;
+      }
+
+      .article-link {
+        display: inline-block;
+        padding: 0.1rem 0.35rem;
+        margin: 0 -0.35rem;
+        border-radius: 4px;
+      }
+
+      .article-link:hover {
+        background: var(--hover);
+        color: #4d83b6;
+      }
+
+      .entry-view {
+        max-width: none;
+        padding-top: 0;
+      }
+
+      .entry-view .back-link {
+        margin-top: 0;
+      }
+
+      .separator {
+        margin: 0.95rem 0 0.65rem;
+        border: 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .small-note {
+        color: var(--muted);
+        font-family: var(--sans);
+        font-size: 0.78rem;
+      }
+
+      .archive-item {
+        display: block;
+        width: fit-content;
+        max-width: 100%;
+        padding: 0.2rem 0.35rem;
+        margin: 0.15rem -0.35rem;
+        border-radius: 4px;
+      }
+
+      .archive-item:hover .archive-title {
+        color: #4d83b6;
+      }
+
+      .archive-title {
+        margin: 0;
+        font-size: 0.9rem;
+        line-height: 1.65;
+        letter-spacing: 0;
+        font-weight: 600;
+        display: inline;
+      }
+
+      .archive-date {
+        display: none;
+      }
+
+      .archive-category {
+        display: none;
+      }
+
+      .entry-view {
+        max-width: none;
+        padding-top: 0;
+      }
+
+      .entry-view .back-link {
+        margin-top: 0;
+      }
+
+      .entry-header {
+        margin: 0.55rem 0 0.95rem;
+      }
+
+      .entry-body p {
+        margin: 0 0 0.8rem;
+        font-size: 0.9rem;
+        line-height: 1.7;
+        color: var(--text);
+        max-width: none;
+      }
+
+      .footer {
+        background: transparent;
+      }
+
+      .footer-inner {
+        display: block;
+        padding: 0 0 2rem;
+        color: var(--muted);
+        font-family: var(--sans);
+        font-size: 0.78rem;
+        letter-spacing: 0;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-top: 0.35rem;
+      }
+
+      .post-nav {
+        display: flex;
+        gap: 0.45rem;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+      }
+
+      .post-nav-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        padding: 0.2rem 0.35rem;
+        margin-left: -0.35rem;
+        border-radius: 4px;
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      .post-nav-link:hover {
+        background: var(--hover);
+        color: var(--text);
+      }
+
+      @media (max-width: 860px) {
+      }
+
+      @media (max-width: 640px) {
+        body {
+          font-size: 0.92rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <div class="topbar-inner">
+          <a class="brand" href="#/">châu</a>
+          <br>
+          <nav class="nav">
+            <a data-nav="home" href="#/">entries</a>
+            <a data-nav="about" href="#/about">about</a>
+          </nav>
+        </div>
+      </header>
+
+      <main id="app" class="page"></main>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <hr class="separator">
+          <div>châu</div>
+          <div class="footer-links">
+            <a href="#/">entries</a>
+            <a href="#/about">about</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const entries = [
+        {
+          id: "carol-danish-girl",
+          title: "Viewing Journal: Carol/The Danish Girl",
+          summary:
+            "Một ghi chép điện ảnh về sự khác biệt giữa vẻ đẹp trau chuốt và chiều sâu cảm xúc, đặt Carol cạnh The Danish Girl để nhìn rõ hơn sự tinh tế của Todd Haynes.",
+          date: "Oct 24, 2023",
+          category: "Featured Essay",
+          featured: true,
+          content: `The Danish Girl rất giống những gì người ta hay nghĩ về Thuý Vân. Suôn sẻ và tròn trịa. Xoay quanh lòng cao thượng và sự hi sinh về cơ bản xuất phát từ một tình huống trao duyên éo le khó ai thấu hiểu. Nhưng Truyện Kiều là tuyệt tác văn chương và Nguyễn Du là đại thi hào của nước Nam, còn The Danish Girl là một bộ phim thiên-tiểu-sử để mồi chài các bác trong viện hàn lâm và để khẳng định Tom Hooper với tư cách một “con đĩ giải thưởng”.
+
+Công thức cho một bộ phim cúng cụ kiểu Hollywood: tiểu sử hoặc dựa trên câu truyện có thật, chiến tranh thế giới thứ II, một câu chuyện về lòng dũng cảm phi thường của con người vượt lên trên mọi hoàn cảnh số phận, và một bài học rút ra đủ đẹp để ai cũng đồng ý. Với tư cách một bộ phim, The Danish Girl lấp lánh mời gọi trên bề mặt nhưng thiếu chiều sâu lẫn rủi ro nghệ thuật.
+
+Làm một bộ phim theo phong cách Hollywood thời studio cũng giống như hát nhạc tiền chiến. Khai thác một chất liệu quá đậm âm hưởng trữ tình lãng mạn rất dễ bị sến. Nhưng không giống Tom Hooper luôn thiếu tính đột phá trong cách tiếp cận, Todd Haynes tạo ra Carol với một sự tinh tế hoàn hảo. Cùng làm việc với một đề tài đang rất thời sự, sản phẩm cuối cùng của hai bộ phim lại cách nhau rất xa về độ thuyết phục.
+
+The Danish Girl quá trang nhã và lịch sự. Bộ phim lúc nào cũng quanh quẩn trong bối cảnh art deco đẹp đẽ màu hổ phách, sợ sệt và lo lắng, không dám đi đến cùng để khắc hoạ nỗi đau thể xác lẫn tinh thần, cũng như sự hoang mang bối rối của hai nhân vật chính. Một bộ phim về quá trình chuyển đổi từ sâu thẳm và cơ bản của một con người, nhưng khoảnh khắc chuyển đổi vô cùng đáng giá trong ngôn ngữ điện ảnh lại diễn ra vụng về.
+
+Một điều thú vị là, điểm nhấn trong khoảnh khắc ấy là hình ảnh bàn tay run rẩy của Einar. Trong Carol, đó cũng là một bàn tay. Todd Haynes sử dụng một medium shot rất trung tính, giữ khoảng cách để thể hiện chính khoảng cách giữa hai nhân vật. Họ là hai người phụ nữ và họ yêu nhau. Một cái đặt tay khẽ thôi mà đủ làm không khí đổi khác.
+
+Giống như The Danish Girl, Carol cũng là một bộ phim quá đẹp. Từng mi-li-mét khuôn hình đều ướt mưa và film grain. Cate Blanchett rực rỡ như một ngôi sao thời Hollywood studio. Rooney Mara mang theo một vẻ nhút nhát nằm giữa ranh giới của nỗi hoảng sợ và sự đe doạ. Cái đẹp ở đây không chỉ để trưng bày. Nó được dùng để làm rõ cái nhìn, dục tính, và khoảng cách.
+
+Therese là một cô gái trẻ, e dè và lạc lõng với thế giới xung quanh. Cô nhìn mọi thứ qua một lăng kính: cửa sổ trên tàu, trên xe, qua kính ngắm máy ảnh. Cô cũng nhìn Carol qua lăng kính của một người lần đầu biết yêu. Đấy là cách bộ phim giới thiệu về female gaze, và cũng là một lời bào chữa rất dễ thương cho cái sự đẹp quá đỗi của nó.
+
+Không phải là một câu chuyện quá độc đáo như The Danish Girl, nhưng Carol vượt trội nhờ một kịch bản xuất sắc và chặt chẽ. Dưới bề mặt bóng loáng của nước Mỹ những năm 50 là một đời sống đầy dò xét, nghi ngờ và bí mật. Thế nên dù dành một cái kết có hậu cho tình yêu của hai người phụ nữ, bộ phim vẫn để lại một dư vị mơ hồ và u ám.
+
+Giới tính, tính dục, tình yêu, và cách con người gọi tên những điều ấy cho đến bây giờ vẫn còn rất nhiều bí ẩn. Và sẽ luôn là như vậy. Carol nhắc đến Freud rất khẽ, cũng như cách nó để mọi cảm xúc quan trọng nhất đi qua ánh mắt, cử chỉ, và khoảng lặng. Theo mình, đó là nơi bộ phim trở nên thực sự quyến rũ.`,
+        },
+        {
+          id: "the-objects-we-keep",
+          title: "The objects we keep after the version of us is gone",
+          summary:
+            "Một ghi chú ngắn về sách cũ, postcard, và lý do vài món đồ nhỏ có thể lưu giữ một đời sống đã đổi khác.",
+          date: "Apr 30, 2024",
+          category: "Notes",
+          content: `There is a specific sadness in finding an object from a life you no longer live.
+
+A receipt in an old novel. A metro ticket pressed flat inside a notebook. A lipstick stain on the rim of a mug you should have thrown away months ago. None of these things are useful. That may be exactly why they survive.
+
+We do not keep objects because they are efficient. We keep them because they delay the clean ending. They let memory remain slightly unfinished.
+
+Minimalism often asks what can be removed. A more honest question might be: what still deserves to stay when its practical value has ended?`,
+        },
+        {
+          id: "soft-architecture-of-routine",
+          title: "Soft architecture for days that refuse to behave",
+          summary:
+            "Khi một ngày bị vỡ kế hoạch từ sớm, đôi khi thứ cứu mình không phải kỷ luật mà là một cấu trúc mềm hơn.",
+          date: "Apr 18, 2024",
+          category: "Personal",
+          content: `Some days resist every perfect system.
+
+The to-do list is reasonable. The calendar is clean. The coffee is hot. Still, the day slips away from you with a kind of elegance.
+
+On those days, rigid routines become one more source of shame. Softer routines do something better: they offer a return path.
+
+Instead of demanding excellence, they ask for re-entry. Read one page. Fold one shirt. Answer one message. Begin again without ceremony.`,
+        },
+        {
+          id: "unfinished-thought",
+          title: "The shape of an unfinished thought",
+          summary:
+            "Một bài mẫu về việc giữ lại ý nghĩ khi nó còn thô ráp, trước khi mình chỉnh sửa nó cho vừa mắt người khác.",
+          date: "Mar 27, 2024",
+          category: "Essay",
+          content: `An unfinished thought is often more honest than a polished conclusion.
+
+Before it learns how to perform, a thought still carries its original temperature. It has hesitation, contradiction, and edges that do not yet line up.
+
+Writing too late can be a form of self-censorship. You do not lose the idea entirely. You lose the exact weather around it.
+
+That is why journals matter. They let the mind appear before it becomes presentable.`,
+        },
+        {
+          id: "rooms-made-of-light",
+          title: "Rooms made of light, silence, and one good chair",
+          summary:
+            "Một bài mẫu ngắn về nội thất tối giản, không phải như phong cách trang trí mà như cách bảo vệ sự tập trung.",
+          date: "Mar 09, 2024",
+          category: "Interiors",
+          content: `Every room teaches you how to behave inside it.
+
+Some rooms accelerate the mind. Some rooms flatten it. The best rooms, at least for reading, do almost nothing. They offer light, proportion, and a place for the body to stay still.
+
+This is not austerity for its own sake. It is editing by atmosphere.
+
+A single chair beside a window can sometimes do more for attention than an entire productivity system.`,
+        },
+        {
+          id: "digital-clutter",
+          title: "Margin notes on digital clutter",
+          summary:
+            "Bài đọc thử về inbox, tab browser, folder desktop, và cảm giác lúc mọi thứ đều ở đó nhưng chẳng cái nào thật sự hiện diện.",
+          date: "Feb 14, 2024",
+          category: "Reflections",
+          content: `Digital clutter is strange because it rarely blocks the room. It blocks the mind.
+
+Thirty-seven tabs remain open not because they are important, but because they represent decisions deferred. Each one says: return to me later. Together they become a chorus.
+
+Physical clutter can be boxed up in an afternoon. Digital clutter feels weightless, which is why it expands so quickly.
+
+To clear it is not just to tidy a screen. It is to stop making future versions of yourself carry yesterday's unfinished attention.`,
+        },
+        {
+          id: "letters-to-next-season",
+          title: "Letters to the next season",
+          summary:
+            "Một entry mẫu hơi riêng tư: vài dòng viết cho chính mình của ba tháng tới, để xem điều gì còn ở lại.",
+          date: "Jan 08, 2024",
+          category: "Journal",
+          content: `Dear next season,
+
+Please do not confuse busyness with movement. They still look too much alike from a distance.
+
+Keep reading slowly. Keep leaving white space in the calendar. Keep buying flowers even when no one is expected.
+
+If nothing dramatic happens, let that count as luck and not failure.`,
+        },
+      ];
+
+      const app = document.getElementById("app");
+
+      function escapeHtml(value) {
+        return value
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#39;");
+      }
+
+      function articleBody(content) {
+        return content
+          .split(/\n\s*\n/)
+          .map((paragraph) => `<p>${escapeHtml(paragraph).replace(/\n/g, "<br>")}</p>`)
+          .join("");
+      }
+
+      function homeView() {
+        return `
+          <section class="simple-card">
+            <hr class="separator">
+            <div class="small-note" style="margin-top: -0.65rem;">entries</div>
+            <br>
+            <div class="article-list">
+              ${entries
+                .map(
+                  (entry) => `
+                    <article class="article-item">
+                      <a class="article-link" href="#/entry/${entry.id}">
+                        <h2 class="article-item-title">${escapeHtml(entry.title)}</h2>&nbsp;
+                      </a>
+                    </article>
+                  `
+                )
+                .join("")}
+            </div>
+          </section>
+        `;
+      }
+
+      function aboutView() {
+        return `
+          <section class="simple-card">
+            <hr class="separator">
+            <div class="page-header">
+              <div class="small-note" style="margin-top: -0.65rem;">about</div>
+              <br>
+              <h1 class="page-title">a quiet journal for essays, film notes, and stray thoughts.</h1>
+              <p class="page-intro">
+                this site is intentionally simple. home contains the writing, and this page is only a short introduction. everything is kept minimal so the text can do most of the work.
+              </p>
+              <p class="page-intro" style="margin-top: 1rem;">
+                essays, fragments, and close reading, arranged in one continuous stream.
+              </p>
+            </div>
+          </section>
+        `;
+      }
+
+      function entryView(id) {
+        const entry = entries.find((item) => item.id === id);
+        const index = entries.findIndex((item) => item.id === id);
+        const previous = index > 0 ? entries[index - 1] : null;
+        const next = index >= 0 && index < entries.length - 1 ? entries[index + 1] : null;
+
+        if (!entry) {
+          return `
+            <section class="simple-card">
+              <hr class="separator">
+              <div class="small-note" style="margin-top: -0.65rem;">missing entry</div>
+              <br>
+              <h1 class="page-title">this article could not be found.</h1>
+              <a class="back-link" href="#/">back to entries</a>
+            </section>
+          `;
+        }
+
+        return `
+          <article class="entry-view">
+            <a class="back-link" href="#/">back to entries</a>
+            <header class="entry-header">
+              <hr class="separator">
+              <div class="eyebrow">
+                <span>${escapeHtml(entry.date)}</span>
+                <span class="eyebrow-line"></span>
+                <span>${escapeHtml(entry.category)}</span>
+              </div>
+              <h1 class="entry-title">${escapeHtml(entry.title)}</h1>
+              <p class="entry-summary">${escapeHtml(entry.summary)}</p>
+            </header>
+            <div class="entry-body">
+              ${articleBody(entry.content)}
+            </div>
+            <div class="post-nav">
+              ${previous ? `<a class="post-nav-link" href="#/entry/${previous.id}">← previous</a>` : ``}
+              ${next ? `<a class="post-nav-link" href="#/entry/${next.id}">next →</a>` : ``}
+            </div>
+          </article>
+        `;
+      }
+
+      function setActiveNav(route) {
+        document.querySelectorAll("[data-nav]").forEach((link) => {
+          link.classList.remove("active");
+        });
+
+        const key =
+          route.startsWith("/about") ? "about" :
+          "home";
+
+        const active = document.querySelector(`[data-nav="${key}"]`);
+        if (active) active.classList.add("active");
+      }
+
+      function render() {
+        const hash = window.location.hash || "#/";
+        const route = hash.slice(1);
+
+        setActiveNav(route);
+
+        if (route.startsWith("/entry/")) {
+          const id = route.replace("/entry/", "");
+          app.innerHTML = entryView(id);
+          return;
+        }
+
+        if (route === "/about") {
+          app.innerHTML = aboutView();
+          return;
+        }
+
+        app.innerHTML = homeView();
+      }
+
+      window.addEventListener("hashchange", render);
+      render();
+    </script>
+  </body>
+</html>
